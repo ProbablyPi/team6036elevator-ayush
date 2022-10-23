@@ -41,6 +41,13 @@ public class HardwareReader {
 		state.gameTimeS = Timer.getFPGATimestamp();
 	}
 
+	private void readElevatorState(RobotState state) {
+		var hardware = HardwareAdapter.ElevatorHardware.getInstance();
+		state.elevatorPosition = hardware.elevatorMotorOne.getSelectedSensorPosition();
+		state.elevatorRadians = state.elevatorPosition / (30 * 2048) * 6.2831853072;
+		SmartDashboard.putNumber("Intake Arm", state.elevatorPosition);
+	}
+
 	private void readSwerveState(RobotState state) {
 		var hardware = HardwareAdapter.SwerveHardware.getInstance();
 		state.gyroHeading = (hardware.gyro.isMagnetometerCalibrated()) ? Rotation2d.fromDegrees(hardware.gyro.getFusedHeading()) : Rotation2d.fromDegrees(360.0 - hardware.gyro.getYaw());

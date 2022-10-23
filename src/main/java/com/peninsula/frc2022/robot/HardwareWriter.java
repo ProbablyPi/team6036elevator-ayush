@@ -3,6 +3,7 @@ package com.peninsula.frc2022.robot;
 import java.util.Set;
 
 import com.ctre.phoenix.motorcontrol.*;
+import com.peninsula.frc2022.config.ElevatorConstants;
 import com.peninsula.frc2022.subsystems.*;
 
 import org.photonvision.common.hardware.VisionLEDMode;
@@ -22,6 +23,7 @@ public class HardwareWriter {
 	void configureHardware(Set<SubsystemBase> enabledSubsystems) {
 		if (enabledSubsystems.contains(Swerve.getInstance())) configureSwerveHardware();
 		if (enabledSubsystems.contains(Vision.getInstance())) configureVisionHardware();
+		if (enabledSubsystems.contains(Elevator.getInstance())) configureElevatorHardware();
 	}
 
 	private void configureSwerveHardware() {
@@ -37,6 +39,33 @@ public class HardwareWriter {
 	void writeHardware(Set<SubsystemBase> enabledSubsystems, @ReadOnly RobotState robotState) {
 		if (enabledSubsystems.contains(Swerve.getInstance())) updateSwerve();
 		updateJoysticks();
+		updateElevator();
+	}
+
+	private void configureElevatorHardware() {
+		var hardware = HardwareAdapter.ElevatorHardware.getInstance();
+
+		hardware.elevatorMotorOne.follow(hardware.elevatorMotorOne);
+		hardware.elevatorMotorOne.setInverted(false);
+		hardware.elevatorMotorTwo.setInverted(true);
+
+		hardware.elevatorMotorOne.config_kP(0, ElevatorConstants.elevatorGains.p);
+		hardware.elevatorMotorOne.config_kI(0, ElevatorConstants.elevatorGains.i);
+		hardware.elevatorMotorOne.config_kD(0, ElevatorConstants.elevatorGains.d);
+		hardware.elevatorMotorOne.config_kF(0, ElevatorConstants.elevatorGains.f);
+
+		hardware.elevatorMotorTwo.config_kP(0, ElevatorConstants.elevatorGains.p);
+		hardware.elevatorMotorTwo.config_kI(0, ElevatorConstants.elevatorGains.i);
+		hardware.elevatorMotorTwo.config_kD(0, ElevatorConstants.elevatorGains.d);
+		hardware.elevatorMotorTwo.config_kF(0, ElevatorConstants.elevatorGains.f);
+
+		hardware.elevatorMotorOne.setNeutralMode(NeutralMode.Brake);
+		hardware.elevatorMotorTwo.setNeutralMode(NeutralMode.Brake);
+
+		hardware.elevatorMotorOne.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 1000);
+		hardware.elevatorMotorTwo.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 1000);
+		hardware.elevatorMotorOne.setSelectedSensorPosition(0.0);
+		hardware.elevatorMotorTwo.setSelectedSensorPosition(0.0);
 	}
 
 	private void updateSwerve() {
@@ -53,5 +82,12 @@ public class HardwareWriter {
 
 	private void updateJoysticks() {
 		var hardware = HardwareAdapter.JoystickHardware.getInstance();
+	}
+
+	private void updateElevator() {
+		var hardware = HardwareAdapter.ElevatorHardware.getInstance();
+		var outputs = Elevator.getInstance().getOutputs1();
+
+		hardware.elevatorMotorOne.setOutput(outputs);
 	}
 }

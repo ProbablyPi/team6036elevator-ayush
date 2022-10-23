@@ -5,7 +5,6 @@ import com.peninsula.frc2022.config.PortConstants;
 import com.peninsula.frc2022.config.SwerveConstants;
 import com.peninsula.frc2022.util.config.Configs;
 import com.peninsula.frc2022.util.control.Falcon;
-import com.peninsula.frc2022.util.control.Spark;
 import com.swervedrivespecialties.swervelib.Mk3SwerveModuleHelper;
 import com.swervedrivespecialties.swervelib.SwerveModule;
 
@@ -64,6 +63,24 @@ public class HardwareAdapter {
 
 		static SwerveHardware getInstance() {
 			if (sInstance == null) sInstance = new SwerveHardware();
+			return sInstance;
+		}
+	}
+
+	static class ElevatorHardware {
+
+		private static ElevatorHardware sInstance;
+
+		final Falcon elevatorMotorOne;
+		final Falcon elevatorMotorTwo;
+
+		private ElevatorHardware() {
+			elevatorMotorOne = new Falcon(PortConstants.kElevatorMotorOneID, "elevatorOne");
+			elevatorMotorTwo = new Falcon(PortConstants.kElevatorMotorTwoID, "elevatorTwo");
+		}
+
+		static ElevatorHardware getInstance() {
+			if (sInstance == null) sInstance = new ElevatorHardware();
 			return sInstance;
 		}
 	}

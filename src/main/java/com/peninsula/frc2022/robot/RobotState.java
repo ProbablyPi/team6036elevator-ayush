@@ -65,4 +65,14 @@ public class RobotState {
 	/* Auto */
 	public PathPlannerTrajectory currentTrajectory;
 	public Pose2d initPose = new Pose2d(0, 0, new Rotation2d(0));
+
+	/* Elevator */
+	public double elevatorPosition;
+	public double elevatorRadians;
+
+	public double gearDiameter;
+	public double gearRotations;
+	public double gearToSpoolRatio = 10;
+	public double spoolDiameter = gearToSpoolRatio * gearDiameter;
+	public double gearToIn = 10 / 3 * gearRotations;
 }

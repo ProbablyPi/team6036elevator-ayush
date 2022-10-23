@@ -26,6 +26,9 @@ public class Commands {
 	/* Vision */
 	public Vision.State visionWanted;
 
+	/* Elevator */
+	public Elevator.State elevatorWanted;
+
 	/* Auto */
 	public PathPlannerTrajectory wantedPathPlannerTrajectory;
 	public Pose2d driveWantedOdometryPose;
