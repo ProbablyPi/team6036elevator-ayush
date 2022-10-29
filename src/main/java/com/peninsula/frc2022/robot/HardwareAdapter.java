@@ -74,9 +74,12 @@ public class HardwareAdapter {
 		final Falcon elevatorMotorOne;
 		final Falcon elevatorMotorTwo;
 
+		final DigitalInput limitSwitch;
+
 		private ElevatorHardware() {
 			elevatorMotorOne = new Falcon(PortConstants.kElevatorMotorOneID, "elevatorOne");
 			elevatorMotorTwo = new Falcon(PortConstants.kElevatorMotorTwoID, "elevatorTwo");
+			limitSwitch = new DigitalInput(PortConstants.kLimitSwitchID);
 		}
 
 		static ElevatorHardware getInstance() {

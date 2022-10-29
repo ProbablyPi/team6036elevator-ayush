@@ -45,6 +45,7 @@ public class HardwareReader {
 		var hardware = HardwareAdapter.ElevatorHardware.getInstance();
 		state.elevatorPosition = hardware.elevatorMotorOne.getSelectedSensorPosition();
 		state.elevatorRadians = state.elevatorPosition / (30 * 2048) * 6.2831853072;
+		hardware.limitSwitch.get();
 		SmartDashboard.putNumber("Intake Arm", state.elevatorPosition);
 	}
 

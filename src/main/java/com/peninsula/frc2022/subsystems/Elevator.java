@@ -40,6 +40,9 @@ public class Elevator extends SubsystemBase {
 				System.out.println("DOWN");
 				mOutputs1.setTargetPosition(ElevatorConstants.elevatorUpPos, ElevatorConstants.elevatorGains);
 				tickPos = ElevatorConstants.elevatorDownPos;
+				if (commands.limitSwitchHit) {
+					break;
+				}
 				break;
 		}
 

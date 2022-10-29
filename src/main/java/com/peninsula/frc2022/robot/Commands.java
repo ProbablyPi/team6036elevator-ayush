@@ -1,5 +1,7 @@
 package com.peninsula.frc2022.robot;
 
+import static com.peninsula.frc2022.config.ElevatorConstants.limitSwitch;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class Commands {
 
 	/* Elevator */
 	public Elevator.State elevatorWanted;
+	public boolean limitSwitchHit = limitSwitch;
 
 	/* Auto */
 	public PathPlannerTrajectory wantedPathPlannerTrajectory;

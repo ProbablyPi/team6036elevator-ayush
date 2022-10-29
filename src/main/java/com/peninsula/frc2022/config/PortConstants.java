@@ -37,6 +37,7 @@ public class PortConstants extends ConfigBase {
 	/** Elevator */
 	public static int kElevatorMotorOneID = 0;
 	public static int kElevatorMotorTwoID = 0;
+	public static int kLimitSwitchID = 0;
 
 	/** Joysticks */
 	public static int kDriverId = 0;

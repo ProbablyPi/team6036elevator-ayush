@@ -69,6 +69,7 @@ public class RobotState {
 	/* Elevator */
 	public double elevatorPosition;
 	public double elevatorRadians;
+	public boolean limitSwtitchHit;
 
 	public double gearDiameter;
 	public double gearRotations;
