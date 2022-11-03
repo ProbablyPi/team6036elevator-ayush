@@ -9,8 +9,6 @@ public class ElevatorConstants {
 
 	public static double c = 0.08;
 
-	public static boolean limitSwitch;
-
 	public static Gains elevatorGains = new Gains(0.025, 0, 0, 0, 0, 0);
 
 	/* Physical Constants */
