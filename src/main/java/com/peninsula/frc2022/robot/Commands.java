@@ -28,8 +28,7 @@ public class Commands {
 
 	/* Elevator */
 	public Elevator.State elevatorWanted;
-	private boolean limitSwitchState;
-	public boolean limitSwitchHit = limitSwitchState;
+	public boolean wantedReset = false;
 
 	/* Auto */
 	public PathPlannerTrajectory wantedPathPlannerTrajectory;
@@ -72,5 +71,8 @@ public class Commands {
 	}
 
 	public void setClimberPosition(double per) {
+	}
+
+	public void elevatorWanted() {
 	}
 }

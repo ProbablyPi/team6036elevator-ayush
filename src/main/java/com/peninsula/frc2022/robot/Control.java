@@ -12,12 +12,19 @@ public class Control {
 	void updateCommands(Commands commands, @ReadOnly RobotState state) {
 		updateDriveCommands(commands, state);
 		updateSuperstructureCommands(commands, state);
+		updateElevator(commands, state);
 	}
 
 	private void updateDriveCommands(Commands commands, RobotState state) {
 		commands.swerveWanted = Swerve.State.TELEOP;
 		commands.boostWanted = (state.driverRt > 0.5);
 		commands.robotCentricWanted = state.driverLtPressed;
+	}
+
+	private void updateElevator(Commands commands, RobotState state) {
+		if (state.driverAPressed) {
+			commands.elevatorWanted();
+		}
 	}
 
 	private void updateSuperstructureCommands(Commands commands, RobotState state) {
