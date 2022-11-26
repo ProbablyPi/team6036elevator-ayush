@@ -73,6 +73,6 @@ public class Commands {
 	public void setClimberPosition(double per) {
 	}
 
-	public void elevatorWanted() {
+	public void elevatorWanted(Elevator.State Elevator) {
 	}
 }

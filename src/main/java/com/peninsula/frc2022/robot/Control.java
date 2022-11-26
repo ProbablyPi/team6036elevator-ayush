@@ -2,6 +2,9 @@ package com.peninsula.frc2022.robot;
 
 import com.peninsula.frc2022.subsystems.*;
 
+import static com.peninsula.frc2022.subsystems.Elevator.State.DOWN;
+import static com.peninsula.frc2022.subsystems.Elevator.State.UP;
+
 /** Used to produce {@link Commands}'s from human input. Should only be used in robot package. */
 public class Control {
 
@@ -23,7 +26,9 @@ public class Control {
 
 	private void updateElevator(Commands commands, RobotState state) {
 		if (state.driverAPressed) {
-			commands.elevatorWanted();
+			commands.elevatorWanted(UP);
+		} else if (state.driverRbPressed) {
+			commands.elevatorWanted(DOWN);
 		}
 	}
 
