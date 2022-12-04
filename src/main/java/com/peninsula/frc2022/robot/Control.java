@@ -30,6 +30,7 @@ public class Control {
 		} else if (state.driverRbPressed) {
 			commands.elevatorWanted(DOWN);
 		}
+		commands.wantedReset = state.limitSwtitchHit;
 	}
 
 	private void updateSuperstructureCommands(Commands commands, RobotState state) {

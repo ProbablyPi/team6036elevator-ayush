@@ -17,6 +17,8 @@ public class Elevator extends SubsystemBase {
 
 	public double tickPos = 0;
 
+	public boolean wantedReset = false;
+
 	private Elevator() {
 	}
 
@@ -30,19 +32,24 @@ public class Elevator extends SubsystemBase {
 
 	@Override
 	public void update(@ReadOnly Commands commands, @ReadOnly RobotState state) {
+		if (commands.wantedReset) {
+			this.wantedReset = commands.wantedReset;
+			commands.wantedReset = false;
+		}
 		switch (commands.elevatorWanted) {
 			case UP:
 				System.out.println("UP");
 				mOutputs1.setTargetPosition(ElevatorConstants.elevatorUpPos, ElevatorConstants.elevatorGains);
 				tickPos = ElevatorConstants.elevatorDownPos;
+
 				break;
 			case DOWN:
 				System.out.println("DOWN");
-				mOutputs1.setTargetPosition(ElevatorConstants.elevatorUpPos, ElevatorConstants.elevatorGains);
-				tickPos = ElevatorConstants.elevatorDownPos;
 				if (commands.wantedReset) {
 					break;
 				}
+				mOutputs1.setTargetPosition(ElevatorConstants.elevatorUpPos, ElevatorConstants.elevatorGains);
+				tickPos = ElevatorConstants.elevatorDownPos;
 				break;
 		}
 

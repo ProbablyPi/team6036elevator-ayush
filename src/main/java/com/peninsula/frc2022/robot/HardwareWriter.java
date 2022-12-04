@@ -87,7 +87,10 @@ public class HardwareWriter {
 	private void updateElevator() {
 		var hardware = HardwareAdapter.ElevatorHardware.getInstance();
 		var outputs = Elevator.getInstance().getOutputs1();
-
+		if (Elevator.getInstance().wantedReset) {
+			hardware.elevatorMotorOne.setSelectedSensorPosition(0);
+			hardware.elevatorMotorTwo.setSelectedSensorPosition(0);
+		}
 		hardware.elevatorMotorOne.setOutput(outputs);
 	}
 }

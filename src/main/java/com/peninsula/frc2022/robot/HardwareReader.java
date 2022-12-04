@@ -45,8 +45,7 @@ public class HardwareReader {
 		var hardware = HardwareAdapter.ElevatorHardware.getInstance();
 		state.elevatorPosition = hardware.elevatorMotorOne.getSelectedSensorPosition();
 		state.elevatorRadians = state.elevatorPosition / (30 * 2048) * 6.2831853072;
-		var limitSwitchState = hardware.limitSwitch.get();
-		SmartDashboard.putNumber("Intake Arm", state.elevatorPosition);
+		state.limitSwtitchHit = hardware.limitSwitch.get();
 	}
 
 	private void readSwerveState(RobotState state) {
